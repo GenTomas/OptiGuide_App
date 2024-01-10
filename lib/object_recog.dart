@@ -53,7 +53,7 @@ class _ObjectRecogState extends State<ObjectRecog> {
     );
   }
 
-  //Initiate object recognition
+  //Initiate camera feed
   initCamera(int direction) async {
     cameras = await availableCameras();
     cameraController = CameraController(
@@ -81,6 +81,7 @@ class _ObjectRecogState extends State<ObjectRecog> {
     });
   }
 
+  //Run object recognition
   runModelOnStreamFrames() async {
     if (imgCamera != null) {
       var recognitions = await Tflite.runModelOnFrame(
@@ -113,7 +114,7 @@ class _ObjectRecogState extends State<ObjectRecog> {
     }
   }
 
-  //Initiate live camera feed
+  //Show camera feed
   @override
   Widget build(BuildContext context) {
     try {
