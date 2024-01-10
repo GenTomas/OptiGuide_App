@@ -118,28 +118,25 @@ class _ObjectRecogState extends State<ObjectRecog> {
   Widget build(BuildContext context) {
     try {
       return Scaffold(
-        body: Column(
+        body: Stack(
+          alignment: AlignmentDirectional.bottomCenter,
           children: [
-            Stack(
-              children: [
-                CameraPreview(cameraController),
-                GestureDetector(
-                  onTap: () {
-                    SystemNavigator.pop();
-                  },
-                  child: button(
-                      Icons.exit_to_app_outlined, Alignment.bottomCenter),
-                )
-              ],
+            CameraPreview(cameraController),
+            GestureDetector(
+              onTap: () {
+                SystemNavigator.pop();
+              },
+              child: button(Icons.exit_to_app_outlined, Alignment.bottomCenter),
             ),
-            const Align(
-              alignment: AlignmentDirectional.topCenter,
-              child: Text(
-                'Object Recognition',
-                style: TextStyle(fontSize: 20),
-              ),
-            ),
-            Center(
+            // const Align(
+            //   alignment: AlignmentDirectional.bottomCenter,
+            //   child: Text(
+            //     'Object Recognition',
+            //     style: TextStyle(fontSize: 20),
+            //   ),
+            // ),
+            Align(
+              alignment: AlignmentDirectional.bottomCenter,
               child: Container(
                   margin: const EdgeInsets.only(bottom: 30.0),
                   child: SingleChildScrollView(
@@ -166,7 +163,7 @@ class _ObjectRecogState extends State<ObjectRecog> {
     return Align(
       alignment: alignment,
       child: Container(
-        // margin: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
+        margin: const EdgeInsets.only(bottom: 20),
         height: 50,
         width: 50,
         decoration: BoxDecoration(

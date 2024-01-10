@@ -66,19 +66,14 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     try {
       return Scaffold(
-        body: Column(
+        body: Stack(
           children: [
-            Stack(
-              children: [
-                CameraPreview(cameraController),
-                GestureDetector(
-                  onTap: () {
-                    scanImage();
-                  },
-                  child:
-                      button(Icons.camera_alt_outlined, Alignment.bottomCenter),
-                )
-              ],
+            CameraPreview(cameraController),
+            GestureDetector(
+              onTap: () {
+                scanImage();
+              },
+              child: button(Icons.camera_alt_outlined, Alignment.bottomCenter),
             )
           ],
         ),
@@ -92,7 +87,7 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
     return Align(
       alignment: alignment,
       child: Container(
-        // margin: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
+        margin: const EdgeInsets.only(bottom: 20),
         height: 50,
         width: 50,
         decoration: BoxDecoration(
