@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'dart:io';
 
@@ -68,13 +69,27 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
       return Scaffold(
         body: Stack(
           children: [
-            CameraPreview(cameraController),
+            SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: CameraPreview(cameraController)
+              ),
             GestureDetector(
               onTap: () {
                 scanImage();
               },
               child: button(Icons.camera_alt_outlined, Alignment.bottomCenter),
-            )
+            ),
+            Align(
+              alignment: AlignmentDirectional.topCenter,
+              child: Container(
+                margin: const EdgeInsets.only(top: 30),
+                child: Text(
+                  'Text Recognition',
+                  style: TextStyle(fontSize: 20, color: '#ffffff'.toColor()),
+                ),
+              ),
+            ),
           ],
         ),
       );

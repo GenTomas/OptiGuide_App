@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:optiguide_app/extra_pages.dart';
+//import 'package:optiguide_app/extra_pages.dart';
 import 'package:optiguide_app/object_recog.dart';
+import 'package:optiguide_app/pages/home_page.dart';
 import 'package:optiguide_app/text_recog.dart';
 
 class Pages extends StatefulWidget {
@@ -37,9 +38,7 @@ class _PagesState extends State<Pages> {
       case 1:
         return const TextRecog();
       case 2:
-        return const MyHomePage(
-          title: 'Home Page',
-        );
+        return const HomePage();
       default:
         return const ObjectRecog(); // Placeholder, you can customize this based on your needs
     }
