@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:optiguide_app/extensions.dart';
 import 'package:tflite/tflite.dart';
 
@@ -122,33 +123,26 @@ class _ObjectRecogState extends State<ObjectRecog> {
         body: Stack(
           alignment: AlignmentDirectional.bottomCenter,
           children: [
-            CameraPreview(cameraController),
+            SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: CameraPreview(cameraController)
+            ),
             GestureDetector(
               onTap: () {
                 SystemNavigator.pop();
               },
               child: button(Icons.exit_to_app_outlined, Alignment.bottomCenter),
             ),
-            // const Align(
-            //   alignment: AlignmentDirectional.bottomCenter,
-            //   child: Text(
-            //     'Object Recognition',
-            //     style: TextStyle(fontSize: 20),
-            //   ),
-            // ),
             Align(
-              alignment: AlignmentDirectional.bottomCenter,
+              alignment: AlignmentDirectional.topCenter,
               child: Container(
-                  margin: const EdgeInsets.only(bottom: 30.0),
-                  child: SingleChildScrollView(
-                      child: Text(
-                    result,
-                    style: TextStyle(
-                        backgroundColor: '#404040'.toColor(),
-                        fontSize: 20.0,
-                        color: '#ffffff'.toColor()),
-                    textAlign: TextAlign.center,
-                  ))),
+                margin: const EdgeInsets.only(top: 30),
+                child: Text(
+                  'Object Recognition',
+                  style: TextStyle(fontSize: 20, color: '#ffffff'.toColor()),
+                ),
+              ),
             ),
           ],
         ),
