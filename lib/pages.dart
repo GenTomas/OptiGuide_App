@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:optiguide_app/currency_recog.dart';
 import 'package:optiguide_app/object_recog.dart';
 //import 'package:optiguide_app/pages/home_page.dart';
 import 'package:optiguide_app/text_recog.dart';
@@ -42,7 +43,7 @@ class _PagesState extends State<Pages> {
       case 1:
         return const TextRecog();
       case 2:
-        return const TTSWidget();
+        return const CurrencyRecog();
       default:
         return const ObjectRecog(); // Placeholder, you can customize this based on your needs
     }

@@ -7,19 +7,19 @@ import 'package:tflite/tflite.dart';
 
 late List<CameraDescription> cameras;
 
-class ObjectRecog extends StatefulWidget {
-  const ObjectRecog({super.key});
+class CurrencyRecog extends StatefulWidget {
+  const CurrencyRecog({super.key});
 
   @override
-  State<ObjectRecog> createState() => _ObjectRecogState();
+  State<CurrencyRecog> createState() => _CurrencyRecogState();
 }
 
-class _ObjectRecogState extends State<ObjectRecog> {
+class _CurrencyRecogState extends State<CurrencyRecog> {
   bool isWorking = false;
   late CameraController cameraController;
   late CameraImage imgCamera;
   int direction = 0;
-  String funcName = 'Object Recognition';
+  String funcName = 'Currency Recognition';
 
   // this.result = objectResult;
 
@@ -32,7 +32,7 @@ class _ObjectRecogState extends State<ObjectRecog> {
     initCamera(0);
 
     //To load the TFlite model
-    loadModel();
+    // loadModel();
     dictateFunction(funcName);
 
     super.initState();
@@ -50,7 +50,7 @@ class _ObjectRecogState extends State<ObjectRecog> {
     cameraController.dispose();
   }
 
-  //Loads the object detection and recognition model
+  //Loads the currency detection and recognition model
   loadModel() async {
     await Tflite.loadModel(
       //Model: MobileNet
@@ -60,7 +60,6 @@ class _ObjectRecogState extends State<ObjectRecog> {
   }
 
   String result = '';
-
   //Initiate camera feed
   initCamera(int direction) async {
     cameras = await availableCameras();
@@ -112,7 +111,6 @@ class _ObjectRecogState extends State<ObjectRecog> {
 
       setState(() {
         textToSpeech(result);
-        // CallTTS(inputTts: result);
       });
 
       isWorking = false;
@@ -154,7 +152,7 @@ class _ObjectRecogState extends State<ObjectRecog> {
               child: Container(
                 margin: const EdgeInsets.only(top: 30),
                 child: Text(
-                  'Object Recognition',
+                  'Currency Recognition',
                   style: TextStyle(fontSize: 20, color: '#ffffff'.toColor()),
                 ),
               ),
