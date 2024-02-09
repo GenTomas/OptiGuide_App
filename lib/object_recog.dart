@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:optiguide_app/extensions.dart';
 import 'package:tflite/tflite.dart';
 
@@ -20,6 +20,8 @@ class _ObjectRecogState extends State<ObjectRecog> {
   late CameraController cameraController;
   late CameraImage imgCamera;
   int direction = 0;
+
+  FlutterTts flutterTts = FlutterTts();
 
   //InitState
   @override
@@ -95,24 +97,28 @@ class _ObjectRecogState extends State<ObjectRecog> {
           imageStd: 127.5,
           rotation: 90,
           numResults: 1,
-          // numResults: 2,
           threshold: 0.1,
           asynch: true);
 
       result = '';
       recognitions?.forEach((response) {
-        result += response['label'] +
-            ' ' +
-            (response['confidence'] as double).toStringAsFixed(2) +
-            '\n\n';
+        result += response['label'] + '\n\n';
       });
 
       setState(() {
-        result;
+        textToSpeech(result);
       });
 
       isWorking = false;
     }
+  }
+
+  void textToSpeech(String text) async {
+    await flutterTts.setLanguage('');
+    await flutterTts.setVolume(0.5);
+    await flutterTts.setSpeechRate(0.5);
+    await flutterTts.setPitch(1);
+    await flutterTts.speak(text);
   }
 
   //Show camera feed
@@ -124,10 +130,9 @@ class _ObjectRecogState extends State<ObjectRecog> {
           alignment: AlignmentDirectional.bottomCenter,
           children: [
             SizedBox(
-              width: double.infinity,
-              height: double.infinity,
-              child: CameraPreview(cameraController)
-            ),
+                width: double.infinity,
+                height: double.infinity,
+                child: CameraPreview(cameraController)),
             GestureDetector(
               onTap: () {
                 SystemNavigator.pop();
@@ -143,6 +148,20 @@ class _ObjectRecogState extends State<ObjectRecog> {
                   style: TextStyle(fontSize: 20, color: '#ffffff'.toColor()),
                 ),
               ),
+            ),
+            Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: Container(
+                  margin: const EdgeInsets.only(bottom: 30.0),
+                  child: SingleChildScrollView(
+                      child: Text(
+                    result,
+                    style: TextStyle(
+                        backgroundColor: '#404040'.toColor(),
+                        fontSize: 20.0,
+                        color: '#ffffff'.toColor()),
+                    textAlign: TextAlign.center,
+                  ))),
             ),
           ],
         ),

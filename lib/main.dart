@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Real-Time Object Recognition App v1.0.0',
+        title: 'OpTiGuide: Object and Text Recognizer App v1.0.0+1',
         home: AnimatedSplashScreen(
             duration: 5000,
             splash: const Image(image: AssetImage('assets/load.png')),
