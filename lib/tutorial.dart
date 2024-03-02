@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:optiguide_app/extensions.dart';
-import 'package:optiguide_app/pages.dart';
+// import 'package:optiguide_app/pages.dart';
 
 class Tutorial extends StatefulWidget {
-  const Tutorial({super.key});
+  final VoidCallback onFinish;
+
+  const Tutorial({super.key, required this.onFinish});
 
   @override
   State<Tutorial> createState() => _TutorialState();
@@ -16,7 +18,6 @@ class _TutorialState extends State<Tutorial> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Preview of the App
@@ -43,10 +44,7 @@ class _TutorialState extends State<Tutorial> {
                 showTutorial(
                     'Congratulations! You have finished the tutorial of OptiGuide. You may now venture your surroundings using the app.\n\nTap the screen to close',
                     () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(builder: (context) => const Pages()),
-                  );
+                  widget.onFinish();
                 });
               });
             });
@@ -57,7 +55,7 @@ class _TutorialState extends State<Tutorial> {
     //Preview of the app
   }
 
-  void showTutorial(String message, Function()? onDismiss) {
+  void showTutorial(String message, Function()? onFinish) {
     //Speak message when the dialog is shown
     speakMessage(message);
 
@@ -67,8 +65,8 @@ class _TutorialState extends State<Tutorial> {
           return GestureDetector(
               onTap: () {
                 Navigator.of(context).pop(); //Close the dialog on tap
-                if (onDismiss != null) {
-                  onDismiss();
+                if (onFinish != null) {
+                  onFinish();
                 }
               },
               child: Dialog(
@@ -98,14 +96,20 @@ class _TutorialState extends State<Tutorial> {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
         home: Scaffold(
-      body: Center(
-        child: Image(
-          image: AssetImage('assets/load.png'),
-          height: double.infinity,
+      body: GestureDetector(
+        onTap: () {
+          Navigator.of(context).pop();
+        },
+        child: const Center(
+          child: Image(
+            image: AssetImage('assets/load.png'),
+            width: 500,
+          ),
         ),
       ),
+      backgroundColor: const Color.fromRGBO(218, 255, 251, 1),
     ));
   }
 }

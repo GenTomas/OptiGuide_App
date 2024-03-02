@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:optiguide_app/extensions.dart';
+import 'package:optiguide_app/tutorial.dart';
 import 'package:tflite/tflite.dart';
 
 late List<CameraDescription> cameras;
@@ -50,7 +50,7 @@ class _CurrencyRecogState extends State<CurrencyRecog> {
     cameraController.dispose();
   }
 
-  //Loads the currency detection and recognition model
+  //Loads the object detection and recognition model
   loadModel() async {
     await Tflite.loadModel(
       //Model: MobileNet
@@ -60,6 +60,7 @@ class _CurrencyRecogState extends State<CurrencyRecog> {
   }
 
   String result = '';
+
   //Initiate camera feed
   initCamera(int direction) async {
     cameras = await availableCameras();
@@ -92,26 +93,29 @@ class _CurrencyRecogState extends State<CurrencyRecog> {
   runModelOnStreamFrames() async {
     if (imgCamera != null) {
       var recognitions = await Tflite.runModelOnFrame(
-          bytesList: imgCamera.planes.map((plane) {
-            return plane.bytes;
-          }).toList(),
-          imageHeight: imgCamera.height,
-          imageWidth: imgCamera.width,
-          imageMean: 127.5,
-          imageStd: 127.5,
-          rotation: 90,
-          numResults: 1,
-          threshold: 0.1,
-          asynch: true);
+        bytesList: imgCamera.planes.map((plane) {
+          return plane.bytes;
+        }).toList(),
+        imageHeight: imgCamera.height,
+        imageWidth: imgCamera.width,
+        imageMean: 127.5,
+        imageStd: 127.5,
+        rotation: 90,
+        numResults: 1, // Set to 1 to detect only one object
+        threshold: 0.1,
+        asynch: true,
+      );
 
-      result = '';
-      recognitions?.forEach((response) {
-        result += response['label'] + '\n\n';
-      });
+      if (recognitions != null && recognitions.isNotEmpty) {
+        // Get the first recognition result
+        var response = recognitions[0];
+        result =
+            response['label'] ?? ''; // Get the label of the detected object
 
-      setState(() {
-        textToSpeech(result);
-      });
+        setState(() {
+          textToSpeech(result);
+        });
+      }
 
       isWorking = false;
     }
@@ -143,16 +147,22 @@ class _CurrencyRecogState extends State<CurrencyRecog> {
                 child: CameraPreview(cameraController)),
             GestureDetector(
               onTap: () {
-                SystemNavigator.pop();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Tutorial(onFinish: () {
+                            Navigator.pop(context);
+                          })),
+                );
               },
-              child: button(Icons.exit_to_app_outlined, Alignment.bottomCenter),
+              child: button(Icons.exit_to_app_outlined, Alignment.topLeft),
             ),
             Align(
               alignment: AlignmentDirectional.topCenter,
               child: Container(
                 margin: const EdgeInsets.only(top: 30),
                 child: Text(
-                  'Currency Recognition',
+                  funcName,
                   style: TextStyle(fontSize: 20, color: '#ffffff'.toColor()),
                 ),
               ),
@@ -185,9 +195,9 @@ class _CurrencyRecogState extends State<CurrencyRecog> {
     return Align(
       alignment: alignment,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 20),
-        height: 50,
-        width: 50,
+        margin: const EdgeInsets.only(top: 30, left: 10),
+        height: 40,
+        width: 40,
         decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: '#ffffff'.toColor(),
