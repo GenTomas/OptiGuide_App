@@ -91,7 +91,6 @@ class _CurrencyRecogState extends State<CurrencyRecog> {
 
   //Run object recognition
   runModelOnStreamFrames() async {
-    // ignore: unnecessary_null_comparison
     if (imgCamera != null) {
       var recognitions = await Tflite.runModelOnFrame(
         bytesList: imgCamera.planes.map((plane) {

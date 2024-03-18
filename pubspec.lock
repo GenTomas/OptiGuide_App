@@ -37,10 +37,10 @@ packages:
     dependency: "direct main"
     description:
       name: camera
-      sha256: f3813a634fd1350a9d2a78ee70e5b247cebedc9c58a24560992620e57a8a5600
+      sha256: "9499cbc2e51d8eb0beadc158b288380037618ce4e30c9acbc4fae1ac3ecb5797"
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.5+8"
+    version: "0.10.5+9"
   camera_android:
     dependency: transitive
     description:
@@ -53,18 +53,18 @@ packages:
     dependency: transitive
     description:
       name: camera_avfoundation
-      sha256: "1408600aa45faad05c518afccaabcd58419412ab67755a405b2ddce4f93fa120"
+      sha256: "7d0763dfcbf060f56aa254a68c103210280bee9e97bbe4fdef23e257a4f70ab9"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.13+9"
+    version: "0.9.14"
   camera_platform_interface:
     dependency: transitive
     description:
       name: camera_platform_interface
-      sha256: fdb8b7a40c3564ce2967273445707d58cbff91bc2fa129e8de80af8cc501e793
+      sha256: fceb2c36038b6392317b1d5790c6ba9e6ca9f1da3031181b8bea03882bf9387a
       url: "https://pub.dev"
     source: hosted
-    version: "2.7.1"
+    version: "2.7.3"
   camera_web:
     dependency: transitive
     description:
@@ -340,10 +340,10 @@ packages:
     dependency: "direct main"
     description:
       name: path_provider
-      sha256: a1aa8aaa2542a6bc57e381f132af822420216c80d4781f7aa085ca3229208aaa
+      sha256: b27217933eeeba8ff24845c34003b003b2b22151de3c908d0e679e8fe1aa078b
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   path_provider_android:
     dependency: transitive
     description:
@@ -356,10 +356,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_foundation
-      sha256: "19314d595120f82aca0ba62787d58dde2cc6b5df7d2f0daf72489e38d1b57f2d"
+      sha256: "5a7999be66e000916500be4f15a3633ebceb8302719b47b9cc49ce924125350f"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.2"
   path_provider_linux:
     dependency: transitive
     description:
@@ -372,10 +372,10 @@ packages:
     dependency: transitive
     description:
       name: path_provider_platform_interface
-      sha256: "94b1e0dd80970c1ce43d5d4e050a9918fce4f4a775e6142424c30a29a363265c"
+      sha256: "88f5779f72ba699763fa3a3b06aa4bf6de76c8e5de842cf6f29e2e06476c2334"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "2.1.2"
   path_provider_windows:
     dependency: transitive
     description:
@@ -575,4 +575,4 @@ packages:
     version: "1.0.4"
 sdks:
   dart: ">=3.3.0-174.2.beta <4.0.0"
-  flutter: ">=3.16.0"
+  flutter: ">=3.16.6"
