@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:optiguide_app/currency_recog.dart';
 import 'package:optiguide_app/object_recog.dart';
-//import 'package:optiguide_app/pages/home_page.dart';
 import 'package:optiguide_app/text_recog.dart';
-import 'package:optiguide_app/text_to_speech.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Pages extends StatefulWidget {
   const Pages({super.key});
@@ -31,10 +31,6 @@ class _PagesState extends State<Pages> {
     );
   }
 
-  void onTextRecognized(String recognizedText) {
-    print('Recognized text: $recognizedText');
-  }
-
   Widget getPage(int index) {
     switch (index) {
       case 0:
@@ -42,7 +38,7 @@ class _PagesState extends State<Pages> {
       case 1:
         return const TextRecog();
       case 2:
-        return const TTSWidget();
+        return const CurrencyRecog();
       default:
         return const ObjectRecog(); // Placeholder, you can customize this based on your needs
     }
