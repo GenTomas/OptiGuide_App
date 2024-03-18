@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:optiguide_app/buttons.dart';
 import 'dart:io';
 import 'package:optiguide_app/extensions.dart';
+import 'package:optiguide_app/side_menu.dart';
 import 'package:optiguide_app/text_to_speech.dart';
 
 late List<CameraDescription> cameras;
@@ -22,15 +25,16 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
   late CameraImage imgCamera;
   int direction = 0;
   bool isBusy = false;
+  String funcName = 'Text Recognition';
 
   final textRecognizer = TextRecognizer();
 
   TextEditingController controller = TextEditingController();
   FlutterTts flutterTts = FlutterTts();
-
   @override
   void initState() {
     initCamera();
+    ConvertTTS().dictateFunction(funcName);
     super.initState();
     WidgetsBinding.instance.addObserver(this);
 
@@ -70,25 +74,44 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
       return Scaffold(
         body: Stack(
           children: [
-            SizedBox(
-                width: double.infinity,
-                height: double.infinity,
-                child: CameraPreview(cameraController)),
-            GestureDetector(
-              onTap: scanImage,
+            Align(
+              alignment: AlignmentDirectional.bottomCenter,
+              child: SizedBox(
+                  width: double.infinity,
+                  height: MediaQuery.of(context).size.height * .92,
+                  child: GestureDetector(
+                      onTap: scanImage,
+                      child: Align(
+                        alignment: AlignmentDirectional.center,
+                        child: SizedBox(
+                            width: double.infinity,
+                            // height: MediaQuery.of(context).size.height * .5,
+                            child: CameraPreview(cameraController)),
+                      ))),
             ),
+            Builder(builder: (context) {
+              return GestureDetector(
+                  onTap: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  child:
+                      Buttons().button(Icons.menu_rounded, Alignment.topLeft));
+            }),
             Align(
               alignment: AlignmentDirectional.topCenter,
               child: Container(
                 margin: const EdgeInsets.only(top: 30),
                 child: Text(
-                  'Text Recognition',
-                  style: TextStyle(fontSize: 20, color: '#ffffff'.toColor()),
+                  funcName,
+                  style: GoogleFonts.montserrat(
+                      fontSize: 20, color: '#000000'.toColor()),
                 ),
               ),
             ),
           ],
         ),
+        backgroundColor: '#64ccc5'.toColor(),
+        drawer: const SideMenu(),
       );
     } catch (e) {
       return const SizedBox();
