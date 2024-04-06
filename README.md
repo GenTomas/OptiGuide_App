@@ -9,9 +9,9 @@ By empowering blind or visually impaired users to interact confidently and indep
 
 Version: 1.0.1+5 (Pre-release)
 
-This is a repository for OptiGuide mainly developed by Tom Angelo F. Fernando assisted by Jethan L. Divinaflor. Currency recognition function is still under development with Christian V. Villagen as its model trainor, assisted by Aldrin P. Obsanga. Research team is led by Camille Shyne F. Barrameda. Overall Project Management is led by Tom Angelo F. Fernando
+This is a repository for OptiGuide mainly developed by Tom Angelo F. Fernando assisted by Jethan L. Divinaflor. Currency recognition function is still under development with Christian V. Villagen as its model trainor, assisted by Aldrin P. Obsanga. Research team is led by Camille Shyne F. Barrameda. Overall Project Management is led by Tom Angelo F. Fernando.
 
-Created and developed by the students of Polytechnic University of the Philippines - Parañaque City Campus
+Created and developed by the students of Polytechnic University of the Philippines - Parañaque City Campus under supervision of faculty members Aldrin P. Obsanga (research adviser) and Brian D. De Vivar (Flutter mobile app development mentor).
 
 ## Getting Started
 
@@ -26,5 +26,5 @@ For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 =======
-# OptiGuide_App
+# OptiGuide: Object and Text Recognizer Mobile Application
 >>>>>>> 6cff369108141e4a4f808f0669e478e892a35ced
