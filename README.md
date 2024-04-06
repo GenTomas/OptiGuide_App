@@ -1,7 +1,17 @@
 <<<<<<< HEAD
-# optiguide_app
+# OptiGuide: Object and Text Recognizer Mobile Application
 
-A new Flutter project.
+OptiGuide is designed with the specific needs of visually impaired individuals and those with visual challenges in mind. This mobile application is a tool for innovation and progress, offering a range of features tailored to enhance accessibility and independence for users with varying degrees of visual impairments.
+
+With functions like object detection, text recognition, currency identification, and text-to-speech capabilities, OptiGuide provides crucial assistance for individuals navigating their surroundings, identifying objects, reading printed text, and recognizing money.
+
+By empowering blind or visually impaired users to interact confidently and independently with their surroundings, OptiGuide significantly improves their overall quality of life.
+
+Version: 1.0.1+5 (Pre-release)
+
+This is a repository for OptiGuide mainly developed by Tom Angelo F. Fernando assisted by Jethan L. Divinaflor. Currency recognition function is still under development with Christian V. Villagen as its model trainor, assisted by Aldrin P. Obsanga. Research team is led by Camille Shyne F. Barrameda. Overall Project Management is led by Tom Angelo F. Fernando
+
+Created and developed by the students of Polytechnic University of the Philippines - Parañaque City Campus
 
 ## Getting Started
 
