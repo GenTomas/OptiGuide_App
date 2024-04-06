@@ -47,5 +47,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Do you want OptiGuide to access camera?</string>
 	<true/>
+	<!-- <key>FirebaseCrashlyticsCollectionEnabled</key>
+	<false/> -->
 </dict>
 </plist>

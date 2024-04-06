@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:optiguide_app/currency_recog.dart';
 import 'package:optiguide_app/object_recog.dart';
 import 'package:optiguide_app/text_recog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class Pages extends StatefulWidget {
   const Pages({super.key});
@@ -12,7 +11,14 @@ class Pages extends StatefulWidget {
 }
 
 class _PagesState extends State<Pages> {
-  PageController pageController = PageController();
+  late PageController pageController;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pageController = PageController();
+  }
 
   @override
   void dispose() {

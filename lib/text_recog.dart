@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:optiguide_app/buttons.dart';
 import 'dart:io';
 import 'package:optiguide_app/extensions.dart';
 import 'package:optiguide_app/side_menu.dart';
@@ -29,13 +31,14 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
 
   TextEditingController controller = TextEditingController();
   FlutterTts flutterTts = FlutterTts();
-
   @override
   void initState() {
-    initCamera(direction);
-    super.initState();
+    initCamera();
     ConvertTTS().dictateFunction(funcName);
+    super.initState();
     WidgetsBinding.instance.addObserver(this);
+
+    // final InputImage inputImage = InputImage.fromFilePath(widget.path!);
   }
 
   @override
@@ -44,7 +47,7 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
   }
 
-  initCamera(int direction) async {
+  initCamera() async {
     cameras = await availableCameras();
     cameraController = CameraController(
         cameras[direction], ResolutionPreset.high,
@@ -91,15 +94,17 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
                   onTap: () {
                     Scaffold.of(context).openDrawer();
                   },
-                  child: button(Icons.menu_rounded, Alignment.topLeft));
+                  child:
+                      Buttons().button(Icons.menu_rounded, Alignment.topLeft));
             }),
             Align(
               alignment: AlignmentDirectional.topCenter,
               child: Container(
                 margin: const EdgeInsets.only(top: 30),
                 child: Text(
-                  'Text Recognition',
-                  style: TextStyle(fontSize: 20, color: '#000000'.toColor()),
+                  funcName,
+                  style: GoogleFonts.montserrat(
+                      fontSize: 20, color: '#000000'.toColor()),
                 ),
               ),
             ),
@@ -114,6 +119,8 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
   }
 
   Future<void> scanImage() async {
+    // final navigator = Navigator.of(context);
+
     try {
       final pictureFile = await cameraController.takePicture();
 
@@ -122,9 +129,14 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
 
       final recognized = await textRecognizer.processImage(inputImage);
 
-      ConvertTTS().textToSpeech(recognized.text);
+      textToSpeech(recognized.text);
+
+      // flutterTts.speak(recognized.text);
+
+      // await navigator.push(MaterialPageRoute(
+      //     builder: (BuildContext context) =>
+      //         TextResult(text: recognized.text)));
     } catch (e) {
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text('An error occurred when scanning text')));
     }
@@ -137,28 +149,53 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
     await flutterTts.setPitch(1);
     await flutterTts.speak(text);
   }
-
-  void dictateFunction(String funcName) async {
-    await flutterTts.speak(funcName);
-  }
-
-  Widget button(IconData icon, Alignment alignment) {
-    return Align(
-      alignment: alignment,
-      child: Container(
-        margin: const EdgeInsets.only(top: 25, left: 10),
-        height: 40,
-        width: 40,
-        child: Center(
-          child: Icon(
-            icon,
-            color: '#000000'.toColor(),
-            // shadows: const <Shadow>[
-            //   Shadow(color: Colors.black, blurRadius: 15.0)
-            // ],
-          ),
-        ),
-      ),
-    );
-  }
 }
+
+// class TextResult extends StatelessWidget {
+//   final String text;
+//   const TextResult({super.key, required this.text});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Result'),
+//       ),
+//       body: Container(
+//         padding: const EdgeInsets.all(30.0),
+//         child: Text(text),
+//       ),
+//     );
+//   }
+// }
+
+  // Widget button(IconData icon, Alignment alignment) {
+  //   return Align(
+  //     alignment: alignment,
+  //     child: Container(
+  //       margin: const EdgeInsets.only(bottom: 20),
+  //       height: 50,
+  //       width: 50,
+  //       decoration: BoxDecoration(
+  //           shape: BoxShape.circle,
+  //           color: '#ffffff'.toColor(),
+  //           boxShadow: [
+  //             BoxShadow(
+  //                 color: '#767676'.toColor(),
+  //                 offset: const Offset(2, 2),
+  //                 blurRadius: 10)
+  //           ]),
+  //       child: Center(
+  //         child: Icon(
+  //           icon,
+  //           color: '#404040'.toColor(),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+
+
+      // TextToSpeech textToSpeech = const TextToSpeech();
+      // textToSpeech.assignText(recognized.text);

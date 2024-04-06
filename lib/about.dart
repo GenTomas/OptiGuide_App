@@ -71,7 +71,7 @@ class About extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                   Text(
-                    '1.0.1+1 Beta',
+                    '1.0.1+3 Beta',
                   ),
                   SizedBox(height: 20),
                   Text('Copyright ©2024'),
