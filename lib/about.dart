@@ -50,17 +50,17 @@ class About extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dignissim suspendisse in est ante. Eleifend donec pretium vulputate sapien. Donec ultrices tincidunt arcu non sodales neque. Praesent tristique magna sit amet purus gravida quis blandit.\n',
+                    'OptiGuide is designed with the specific needs of visually impaired individuals and those with visual challenges in mind. This mobile application is a tool for innovation and progress, offering a range of features tailored to enhance accessibility and independence for users with varying degrees of visual impairments. \n',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.justify,
                   ),
                   Text(
-                    'Integer sit amet est odio. Curabitur posuere sapien ut enim hendrerit, et sodales nunc tempus. Integer ac vestibulum neque. Sed convallis lorem nec velit ullamcorper, sit amet ultricies ligula dictum.\n',
+                    'With functions like object detection, text recognition, currency identification, and text-to-speech capabilities, OptiGuide provides crucial assistance for individuals navigating their surroundings, identifying objects, reading printed text, and recognizing money.\n',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.justify,
                   ),
                   Text(
-                    'Suspendisse potenti. Sed maximus eleifend urna, ut tempus tortor tincidunt nec. Etiam eu lectus eget est aliquet accumsan. Morbi et tortor malesuada, scelerisque leo at, efficitur ipsum.',
+                    'By empowering blind or visually impaired users to interact confidently and independently with their surroundings, OptiGuide significantly improves their overall quality of life.',
                     style: TextStyle(fontSize: 16),
                     textAlign: TextAlign.justify,
                   ),
@@ -71,7 +71,7 @@ class About extends StatelessWidget {
                     textAlign: TextAlign.start,
                   ),
                   Text(
-                    '1.0.1+3 Beta',
+                    '1.0.1+5 Beta',
                   ),
                   SizedBox(height: 20),
                   Text('Copyright ©2024'),

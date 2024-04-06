@@ -104,7 +104,9 @@ class _TextRecogState extends State<TextRecog> with WidgetsBindingObserver {
                 child: Text(
                   funcName,
                   style: GoogleFonts.montserrat(
-                      fontSize: 20, color: '#000000'.toColor()),
+                      fontSize: 20,
+                      color: '#000000'.toColor(),
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ),
