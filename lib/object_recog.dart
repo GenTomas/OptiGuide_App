@@ -60,9 +60,12 @@ class _ObjectRecogState extends State<ObjectRecog> {
   //Loads the object detection and recognition model
   loadModel() async {
     await Tflite.loadModel(
-      //Model: MobileNet
+      //Model: SSD MobileNet
       model: 'assets/mobilenet_v1_1.0_224.tflite',
       labels: 'assets/mobilenet_v1_1.0_224.txt',
+
+      // model: 'assets/currency_recog.tflite',
+      // labels: 'assets/currency_recog.txt',
     );
   }
 
@@ -84,7 +87,7 @@ class _ObjectRecogState extends State<ObjectRecog> {
             isWorking = true;
             imgCamera = imagesFromStream;
 
-            // runModelOnStreamFrames();
+            runModelOnStreamFrames();
           }
         });
       });
@@ -95,44 +98,9 @@ class _ObjectRecogState extends State<ObjectRecog> {
   }
 
   //Run object recognition
-  // runModelOnStreamFrames() async {
-  //   if (imgCamera != null) {
-  //     var recognitions = await Tflite.runModelOnFrame(
-  //         bytesList: imgCamera.planes.map((plane) {
-  //           return plane.bytes;
-  //         }).toList(),
-  //         imageHeight: imgCamera.height,
-  //         imageWidth: imgCamera.width,
-  //         imageMean: 127.5,
-  //         imageStd: 127.5,
-  //         rotation: 90,
-  //         numResults: 1,
-  //         threshold: 0.1,
-  //         asynch: true);
-
-  //     result = '';
-  //     recognitions?.forEach((response) {
-  //       result += response['label'] + '\n\n';
-  //     });
-
-  //     setState(() {
-  //       ConvertTTS().textToSpeech(result);
-  //     });
-
-  //     isWorking = false;
-  //   }
-  // }
-
-  void recognizeObject() async {
-    // Check if the camera feed and context are available
-    if (imgCamera != null && context.mounted) {
-      // Capture a new frame from the camera
-      XFile? picture = await cameraController.takePicture();
-
-      // Check if the captured frame is not null
-      if (picture != null) {
-        // Run object recognition on the captured frame
-        var recognitions = await Tflite.runModelOnFrame(
+  runModelOnStreamFrames() async {
+    if (imgCamera != null) {
+      var recognitions = await Tflite.runModelOnFrame(
           bytesList: imgCamera.planes.map((plane) {
             return plane.bytes;
           }).toList(),
@@ -141,34 +109,74 @@ class _ObjectRecogState extends State<ObjectRecog> {
           imageMean: 127.5,
           imageStd: 127.5,
           rotation: 90,
-          numResults: 1, // Set to 1 to detect only one object
+          numResults: 1,
           threshold: 0.1,
-          asynch: true,
-        );
+          asynch: true);
 
-        // Check if the context is still mounted and recognitions are available
-        if (context.mounted &&
-            recognitions != null &&
-            recognitions.isNotEmpty) {
-          // Get the first recognition result
-          var response = recognitions[0];
-          result =
-              response['label'] ?? ''; // Get the label of the detected object
+      result = '';
+      recognitions?.forEach((response) {
+        result += response['label'] + '\n\n';
+      });
 
-          // Update the UI with the recognized object
-          setState(() {
-            ConvertTTS().textToSpeech(result);
-          });
+      setState(() {
+        ConvertTTS().textToSpeech(result);
+      });
 
-          Future.delayed(const Duration(seconds: 5), () {
-            setState(() {
-              result = '';
-            });
-          });
-        }
-      }
+      isWorking = false;
     }
   }
+
+  // void recognizeObject() async {
+  //   CameraPreview(cameraController);
+  //   // Check if the camera feed and context are available
+  //   if (imgCamera != null && context.mounted) {
+  //     // Capture a new frame from the camera
+  //     XFile? picture = await cameraController.takePicture();
+
+  //     // Check if the captured frame is not null
+  //     if (picture != null) {
+  //       // Run object recognition on the captured frame
+  //       var recognitions = await Tflite.runModelOnFrame(
+  //         bytesList: imgCamera.planes.map((plane) {
+  //           return plane.bytes;
+  //         }).toList(),
+  //         imageHeight: imgCamera.height,
+  //         imageWidth: imgCamera.width,
+  //         imageMean: 127.5,
+  //         imageStd: 127.5,
+  //         rotation: 90,
+  //         numResults: 1, // Set to 1 to detect only one object
+  //         threshold: 0.1,
+  //         asynch: true,
+  //       );
+
+  //       // Check if the context is still mounted and recognitions are available
+  //       if (context.mounted &&
+  //           recognitions != null &&
+  //           recognitions.isNotEmpty) {
+  //         // Get the first recognition result
+  //         var response = recognitions[0];
+  //         result =
+  //             response['label'] ?? ''; // Get the label of the detected object
+
+  //         // Update the UI with the recognized object
+  //         setState(() {
+  //           ConvertTTS().textToSpeech(result);
+  //         });
+
+  //         isWorking = false;
+  //         picture = null;
+  //         recognitions = null;
+
+  //         Future.delayed(const Duration(seconds: 5), () {
+  //           setState(() {
+  //             result = '';
+  //           });
+  //         });
+  //       }
+  //     }
+  //   }
+  // }
 
   //Show camera feed
   @override
@@ -181,12 +189,10 @@ class _ObjectRecogState extends State<ObjectRecog> {
               SizedBox(
                   width: double.infinity,
                   height: MediaQuery.of(context).size.width * 1.95,
-                  // child: CameraPreview(cameraController)),
-                  child: GestureDetector(
-                      // onTap: () => print('Screen is pressed'),
-                      // onTap: testingGesture,
-                      onTap: recognizeObject,
-                      child: CameraPreview(cameraController))),
+                  child: CameraPreview(cameraController)),
+              // child: GestureDetector(
+              //     onTap: recognizeObject,
+              //     child: CameraPreview(cameraController))),
               Builder(builder: (context) {
                 return GestureDetector(
                   onTap: () {

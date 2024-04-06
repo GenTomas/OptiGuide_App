@@ -1,0 +1,15 @@
+old twenty five centavo coin
+new twenty five centavo coin
+old one peso coin
+new one peso coin
+old five peso coin
+new five peso coin
+old ten peso coin
+new ten peso coin
+twenty peso coin
+twenty peso bill
+fifty peso bill
+one hundred peso bill
+two hundred peso bill
+five hundred peso bill
+one thousand peso bill
